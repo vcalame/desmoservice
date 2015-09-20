@@ -1,0 +1,3 @@
+Bibliothèque destinée à communiquer avec un serveur Desmoservice :
+-en lecture, transforme les objets JSON en objet Ruby plus facilement manipulables
+-en écriture, aide à la rédaction du fichier XMl d'édition
