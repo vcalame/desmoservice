@@ -13,19 +13,19 @@ class Edition
   end
   
   #arg peut être un entier (id) ou une chaine (localkey)
-  def link_creation(down_arg=nil)
+  def create_ligature(inferior_arg=nil)
     @xml << '<lienhierarchique-creation'
-    Edition.to_attribute(@xml, down_arg, 'fils')
+    Edition.to_attribute(@xml, inferior_arg, 'fils')
     @xml << '>'
-    yield(LinkCreation.new(@xml))
+    yield(LigatureEdit.new(@xml))
     @xml << '</lienhierarchique-creation>'
   end
   
-  def term_change(term_arg)
+  def change_term(term_arg)
     @xml << '<terme-change'
     Edition.to_attribute(@xml, term_arg)
     @xml << '>'
-    yield(TermChange.new(@xml))
+    yield(TermEdit.new(@xml))
     @xml << '</terme-change>'
   end
   
@@ -85,17 +85,24 @@ class Edition
       xml << '</attr>'
     end
   end
+  
+  def self.key_prefix(xml, key_prefix_arg)
+    xml << '<key-prefix>'
+    xml << Rack::Utils.escape_html(key_prefix_arg)
+    xml << '</key-prefix>'
+  end
+  
 end
 
-class LinkCreation
+class LigatureEdit
   
   def initialize(xml)
     @xml = xml
   end
   
-  def up(up_arg, context_arg=nil)
+  def superior(superior_arg, context_arg=nil)
     @xml << '<pere'
-    Edition.to_attribute(@xml, up_arg)
+    Edition.to_attribute(@xml, superior_arg)
     if not context_arg.nil?
       if context_arg.is_a? Integer
         @xml << ' contexte="' << context_arg.to_s << '"'
@@ -119,9 +126,13 @@ class LinkCreation
   def attr(attr_key, values)
     Edition.attr(@xml, attr_key, values)
   end
+  
+  def key_prefix(key_prefix_arg)
+    Edition.key_prefix(@xml, key_prefix_arg)
+  end
 end
 
-class TermChange
+class TermEdit
   
   def initialize(xml)
     @xml = xml

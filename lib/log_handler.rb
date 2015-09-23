@@ -5,7 +5,6 @@ class LogHandler
   
   def initialize(destination)
     @destination = destination
-    
   end
   
   def add_log_message(log_message)
