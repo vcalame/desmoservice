@@ -1,6 +1,7 @@
 require 'net/http'
 require 'json'
 require_relative 'conf'
+require_relative 'error'
 require_relative 'families'
 require_relative 'ventilation'
 require_relative 'term'

@@ -21,6 +21,15 @@ class Edition
     @xml << '</lienhierarchique-creation>'
   end
   
+  #arg peut être un entier (id) ou une chaine (localkey)
+  def remove_ligature(inferior_arg=nil)
+    @xml << '<lienhierarchique-remove'
+    Edition.to_attribute(@xml, inferior_arg, 'fils')
+    @xml << '>'
+    yield(LigatureEdit.new(@xml))
+    @xml << '</lienhierarchique-remove>'
+  end
+  
   def change_term(term_arg)
     @xml << '<terme-change'
     Edition.to_attribute(@xml, term_arg)

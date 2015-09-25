@@ -1,7 +1,7 @@
 module Desmoservice
 
 class Term
-  attr_reader :id, :localkey, :text, :color, :attrs
+  attr_reader :id, :localkey, :text, :color, :attrs, :parent_id, :parent_localkey
   
   def initialize(data)
     @id = data['code']
@@ -25,6 +25,18 @@ class Term
     @attrs = nil
     if data.has_key?('attrs')
       @attrs = data['attrs']
+    end
+    @parent_id = nil
+    if data.has_key?('parentCode')
+      @parent_id = data['parentCode'].to_i
+    elsif data.has_key?('familleCode')
+      @parent_id = data['familleCode'].to_i
+    end
+    @parent_localkey = nil
+    if data.has_key?('parentCode')
+      @parent_localkey = data['parentIdctxt']
+    elsif data.has_key?('familleCode')
+      @parent_localkey = data['familleIdctxt']
     end
   end
   
