@@ -48,6 +48,22 @@ class Get
     word_distribution.parse_json(json_string)
     return word_distribution
   end
+  
+  def self.terms(desmoservice_conf, get_params, http=nil)
+    options = get_params.to_h('terms')
+    uri = desmoservice_conf.build_json_uri(options)
+    if http.nil?
+      json_string = Net::HTTP.get(uri)
+    else
+      request = Net::HTTP::Get.new(uri)
+      response = http.request(request)
+      json_string = response.body
+    end
+    terms = Terms.new()
+    terms.parse_json(json_string)
+    return terms
+  end
+  
 end
 
 end

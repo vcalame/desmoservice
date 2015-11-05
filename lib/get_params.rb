@@ -4,17 +4,20 @@ class GetParams
   attr_accessor :with_keys, :with_attrs, :with_parent,
       :family_filter, :inferiors_only,
       :ventilation_root_id, :ventilation_root_uri, :ventilation_name,
-      :ignore_empty_sectors
+      :ignore_empty_sectors,
+      :query
       
   
   def initialize()
     @with_keys = true
     @with_attrs = false
+    @with_parent = false
     @ventilation_root_id = nil
     @ventilation_root_uri = nil
     @ignore_empty_sectors = nil
     @ventilation_name = 'ventilation:naturelle'
     @inferiors_only = false
+    @query = nil
   end
   
   def to_h(type)
@@ -53,6 +56,11 @@ class GetParams
       end
       if not @ventilation_name.nil?
         result['name'] =  @ventilation_name
+      end
+    end
+    if type == 'terms'
+      if not @query.nil?
+        result['q'] = @query
       end
     end
     return result
