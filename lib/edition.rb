@@ -31,11 +31,17 @@ class Edition
   end
   
   def change_term(term_arg)
-    @xml << '<terme-change'
+    @xml << '<term-change'
     Edition.to_attribute(@xml, term_arg)
     @xml << '>'
     yield(TermEdit.new(@xml))
-    @xml << '</terme-change>'
+    @xml << '</term-change>'
+  end
+  
+  def remove_term(term_arg)
+    @xml << '<term-remove'
+    Edition.to_attribute(@xml, term_arg)
+    @xml << '/>'
   end
   
   def self.to_attribute(xml, term_arg, suffix=nil)
