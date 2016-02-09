@@ -33,9 +33,9 @@ class Term
       @parent_id = data['familleCode'].to_i
     end
     @parent_localkey = nil
-    if data.has_key?('parentCode')
+    if data.has_key?('parentIdctxt')
       @parent_localkey = data['parentIdctxt']
-    elsif data.has_key?('familleCode')
+    elsif data.has_key?('familleIdctxt')
       @parent_localkey = data['familleIdctxt']
     end
   end
