@@ -6,7 +6,7 @@ class Post
   def initialize
   end
   
-  def self.xml(desmoservice_conf, xml, log_handler=nil, http=nil)
+  def self.xml(desmoservice_conf, xml, http: nil, log_handler: nil)
     uri = desmoservice_conf.build_edition_uri
     if http.nil?
       response = Net::HTTP.post_form(uri, 'desmo' => desmoservice_conf.desmo_name, 'xml' => xml)

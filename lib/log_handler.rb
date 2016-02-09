@@ -10,6 +10,10 @@ class LogHandler
   def add_log_message(log_message)
     destination << log_message << "\n"
   end
+  
+  def new_line()
+    destination << "\n"
+  end
 
 end
 

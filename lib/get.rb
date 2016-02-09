@@ -4,7 +4,7 @@ class Get
   def initialize
   end
   
-  def self.families(desmoservice_conf, get_params, http=nil)
+  def self.families(desmoservice_conf, get_params, http: nil, log_handler: nil)
     options = get_params.to_h('familles')
     uri = desmoservice_conf.build_json_uri(options)
     if http.nil?
@@ -16,10 +16,15 @@ class Get
     end
     families = Families.new()
     families.parse_json(json_string)
+    if not log_handler.nil?
+      log_handler.add_log_message(uri.to_s)
+      log_handler.add_log_message(json_string.force_encoding("UTF-8"))
+      log_handler.new_line()
+    end
     return families
   end
   
-  def self.ventilation(desmoservice_conf, get_params, http=nil)
+  def self.ventilation(desmoservice_conf, get_params, http: nil, log_handler: nil)
     options = get_params.to_h('ventilation')
     uri = desmoservice_conf.build_json_uri(options)
     if http.nil?
@@ -31,10 +36,15 @@ class Get
     end
     ventilation = Ventilation.new()
     ventilation.parse_json(json_string)
+    if not log_handler.nil?
+      log_handler.add_log_message(uri.to_s)
+      log_handler.add_log_message(json_string.force_encoding("UTF-8"))
+      log_handler.new_line()
+    end
     return ventilation
   end
   
-  def self.word_distribution(desmoservice_conf, get_params, http=nil)
+  def self.word_distribution(desmoservice_conf, get_params, http: nil, log_handler: nil)
     options = get_params.to_h('lexiedistribution')
     uri = desmoservice_conf.build_json_uri(options)
     if http.nil?
@@ -46,10 +56,15 @@ class Get
     end
     word_distribution = WordDistribution.new()
     word_distribution.parse_json(json_string)
+    if not log_handler.nil?
+      log_handler.add_log_message(uri.to_s)
+      log_handler.add_log_message(json_string.force_encoding("UTF-8"))
+      log_handler.new_line()
+    end
     return word_distribution
   end
   
-  def self.terms(desmoservice_conf, get_params, http=nil)
+  def self.terms(desmoservice_conf, get_params, http: nil, log_handler: nil)
     options = get_params.to_h('terms')
     uri = desmoservice_conf.build_json_uri(options)
     if http.nil?
@@ -61,6 +76,11 @@ class Get
     end
     terms = Terms.new()
     terms.parse_json(json_string)
+    if not log_handler.nil?
+      log_handler.add_log_message(uri.to_s)
+      log_handler.add_log_message(json_string.force_encoding("UTF-8"))
+      log_handler.new_line()
+    end
     return terms
   end
   

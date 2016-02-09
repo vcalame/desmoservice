@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'desmoservice'
-  s.version     = '0.2.0'
-  s.date        = '2015-11-05'
+  s.version     = '0.2.1'
+  s.date        = '2015-11-09'
   s.license     = 'Ruby'
   s.summary     = 'Read and write access to Desmoservice API'
   s.description = 'Manage the connection to Desmoservice server, convert JSON to ruby objects and build XML for edition'
